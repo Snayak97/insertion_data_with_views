@@ -36,9 +36,38 @@ def insert_acess(request):
     Wo=Webpage.objects.get_or_create(topic_name=To,name=n,url=u)[0]
     Wo.save()
 
-    Date=input('enterdate : ')
+    Date=input('enterdate yyyy-dd-mm : ')
     Au=input('enter author name : ')
     Ao=AcessRecord.objects.get_or_create(name=Wo,date=Date,author=Au)[0]
     Ao.save()
 
     return HttpResponse("<h1>Acces is inserted<h1/>")
+
+
+
+
+
+
+# create new views for font end
+
+#display Topic Models
+
+def display_topic(request):
+    topics=Topic.objects.filter(topic_name='Footbal')
+    d={'topics':topics}
+    return render(request,'display_topic.html',d)
+
+#display Webpage Models
+
+def display_webpage(request):
+    webpages=Webpage.objects.filter(topic_name='Footbal')
+    d={'webpages':webpages}
+    return render(request,'display_webpage.html',d)
+
+#display AccessRecord Models
+
+def display_AcessRecord(request):
+    Acess=AcessRecord.objects.all()
+    d={'Acess':Acess}
+    return render(request,'display_AcessRecord.html',d)
+
